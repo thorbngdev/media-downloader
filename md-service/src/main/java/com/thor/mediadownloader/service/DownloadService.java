@@ -26,91 +26,42 @@ public class DownloadService {
     /**
      * Doc -> https://github.com/sealedtx/java-youtube-downloader
      * @param url
+     * @param formatStr
      * @return
      */
-    public String download(String url) {
+    public String download(String url, String formatStr) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
         String youtubeId = getYoutubeId(url);
-        // req/res
         RequestVideoInfo request = new RequestVideoInfo(youtubeId);
         Response<VideoInfo> response = downloader.getVideoInfo(request);
-
-        // data
         VideoInfo video = response.data();
         VideoDetails details = video.details();
+        File outputFile = new File("youtube_files");
+
         List<VideoWithAudioFormat> videoWithAudioFormats = video.videoWithAudioFormats();
         List<VideoFormat> videoFormats = video.videoFormats();
         List<AudioFormat> audioFormats = video.audioFormats();
 
-        // logs
-        printVideoContent(video, videoWithAudioFormats, videoFormats, audioFormats);
+        Format format = null;
+        String titulo = null;
+        switch(formatStr) {
+            case "audio":
+                titulo = "Audio - " + details.title();
+                format = video.bestAudioFormat();
+                break;
+            case "video":
+                titulo = "Original - " + details.title();
+                format = video.bestVideoWithAudioFormat();
+                break;
+            case "video-no-sound":
+                titulo = "Video - " + details.title();
+                format = video.bestVideoFormat();
+                break;
+        }
 
-        // Local download
-        File outputFile = new File("youtube_files");
-        Format format = video.bestAudioFormat();
         RequestVideoFileDownload downloadRequest = new RequestVideoFileDownload(format)
                 .saveTo(outputFile)
-                .renameTo(details.title())
-                .overwriteIfExists(true);
-        Response<File> downloadResponse = downloader.downloadVideoFile(downloadRequest);
-        File downloadData = downloadResponse.data();
-        System.out.println(downloadData.getName());
-
-        return video.details().title().concat(" downloaded!");
-    }
-
-    public String downloadAudio(String url) {
-        YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
-        String youtubeId = getYoutubeId(url);
-        RequestVideoInfo request = new RequestVideoInfo(youtubeId);
-        Response<VideoInfo> response = downloader.getVideoInfo(request);
-        VideoInfo video = response.data();
-        VideoDetails details = video.details();
-        File outputFile = new File("youtube_files");
-        Format format = video.bestAudioFormat();
-        RequestVideoFileDownload downloadRequest = new RequestVideoFileDownload(format)
-                .saveTo(outputFile)
-                .renameTo("Only audio - " + details.title())
-                .overwriteIfExists(true);
-        Response<File> downloadResponse = downloader.downloadVideoFile(downloadRequest);
-        File downloadData = downloadResponse.data();
-        System.out.println(downloadData.getName());
-
-        return details.title().concat(" downloaded!");
-    }
-
-    public String downloadVideo(String url) {
-        YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
-        String youtubeId = getYoutubeId(url);
-        RequestVideoInfo request = new RequestVideoInfo(youtubeId);
-        Response<VideoInfo> response = downloader.getVideoInfo(request);
-        VideoInfo video = response.data();
-        VideoDetails details = video.details();
-        File outputFile = new File("youtube_files");
-        Format format = video.bestVideoWithAudioFormat();
-        RequestVideoFileDownload downloadRequest = new RequestVideoFileDownload(format)
-                .saveTo(outputFile)
-                .renameTo("Original - " + details.title())
-                .overwriteIfExists(true);
-        Response<File> downloadResponse = downloader.downloadVideoFile(downloadRequest);
-        File downloadData = downloadResponse.data();
-        System.out.println(downloadData.getName());
-
-        return details.title().concat(" downloaded!");
-    }
-
-    public String downloadVideoWithoutAudio(String url) {
-        YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
-        String youtubeId = getYoutubeId(url);
-        RequestVideoInfo request = new RequestVideoInfo(youtubeId);
-        Response<VideoInfo> response = downloader.getVideoInfo(request);
-        VideoInfo video = response.data();
-        VideoDetails details = video.details();
-        File outputFile = new File("youtube_files");
-        Format format = video.bestVideoFormat();
-        RequestVideoFileDownload downloadRequest = new RequestVideoFileDownload(format)
-                .saveTo(outputFile)
-                .renameTo("Only Video - " + details.title())
+                .renameTo(titulo)
                 .overwriteIfExists(true);
         Response<File> downloadResponse = downloader.downloadVideoFile(downloadRequest);
         File downloadData = downloadResponse.data();
