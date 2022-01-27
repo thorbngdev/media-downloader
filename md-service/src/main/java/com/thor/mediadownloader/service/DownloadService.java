@@ -38,10 +38,6 @@ public class DownloadService {
         VideoDetails details = video.details();
         File outputFile = new File("youtube_files");
 
-        List<VideoWithAudioFormat> videoWithAudioFormats = video.videoWithAudioFormats();
-        List<VideoFormat> videoFormats = video.videoFormats();
-        List<AudioFormat> audioFormats = video.audioFormats();
-
         Format format = null;
         String titulo = null;
         switch(formatStr) {
@@ -64,10 +60,8 @@ public class DownloadService {
                 .renameTo(titulo)
                 .overwriteIfExists(true);
         Response<File> downloadResponse = downloader.downloadVideoFile(downloadRequest);
-        File downloadData = downloadResponse.data();
-        System.out.println(downloadData.getName());
-
-        return details.title().concat(" downloaded!");
+        logger.info("{} downloaded", details.title());
+        return downloadResponse.data().getName();
     }
 
     private String getYoutubeId(String url) {
