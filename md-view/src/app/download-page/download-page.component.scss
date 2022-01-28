@@ -1,5 +1,5 @@
 .main-body {
-    margin-top: 5%;
+    margin-top: 3%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,12 +12,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    width: 51%;
+    width: 60%;
     gap: 24px;
 }
 
 .def-text {
-    font-size: 36px;
+    font-size: 48px;
 }
 
 .url-input {
@@ -80,10 +80,20 @@
     font-family: "Dongle", sans-serif;
     font-size: 24px;
     align-content: center;
-    width: 72%;
+    width: 68%;
     margin-top: 1%;
     border-style: solid;
     border-radius: 0.5rem;
     padding: 8px;
     border-color: rgba(137, 211, 0, 0.199);
+}
+
+.title-download-buttons, .title-info-card {
+    font-family: "Dongle", sans-serif;
+    font-size: 32px;
+    align-self: center;
+}
+
+.thumbnail-img {
+    align-self: center;
 }

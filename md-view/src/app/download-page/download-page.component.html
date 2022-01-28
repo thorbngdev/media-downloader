@@ -1,19 +1,22 @@
 <body class="main-body">
-    <label class="def-text">Youtube Downloader</label>
+    <label class="def-text"><strong>Youtube Downloader</strong></label>
     <input #urlInput class="url-input" type="text" placeholder="ex. https://www.youtube.com/watch?v=hEdV6MWq18I">
     <button class="load-button" (click)="clickForDownload(urlInput.value)">Load</button>
     <div *ngIf="videoInfo != undefined" class="secondary-body-1">
         <div class="video-info-detail">
-            <label><strong>Video ID:</strong> {{videoInfo.videoId}}</label>
+            <label class="title-info-card"><strong>Video Infos</strong></label>
+            <img class="thumbnail-img" [src]="videoInfo.thumbnails[2]">
             <label><strong>Title:</strong> {{videoInfo.title}}</label>
-            <label><strong>Author:</strong> {{videoInfo.author}}</label>
+            <label><strong>Duration:</strong> {{videoInfo.duration}}</label>
             <label><strong>Views:</strong> {{videoInfo.viewCount}}</label>
+            <label><strong>Author:</strong> {{videoInfo.author}}</label>
             <label><strong>Average Rating:</strong> {{videoInfo.averageRating}}</label>
         </div>
         <div class="video-download-buttons-div">
+            <label class="title-download-buttons"><strong>Download</strong></label>
             <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'audio')">Only sound</button>
             <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video')">Original Video</button>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video-no-sound')">Video No Sound</button>
+            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video-no-sound')">Video Without Sound</button>
         </div>
     </div>
 </body>

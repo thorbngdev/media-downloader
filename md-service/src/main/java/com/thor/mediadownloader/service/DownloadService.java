@@ -75,8 +75,26 @@ public class DownloadService {
     }
 
     private String getYoutubeId(String url) {
-        String[] str = url.split("watch" + "\\?" + "v=");
-        return str[str.length - 1];
+        String[] str;
+        String id = "";
+
+        if (url.contains("youtu.be")) {
+            url = url.replace("https://", "");
+            str = url.split("/");
+            id = str[str.length - 1];
+        } else if (url.contains("www.youtube.com")) {
+            str = url.split("watch\\?v=");
+            id = str[str.length - 1];
+        }
+
+        if (id.contains("&list="))
+            id = id.split("&list=")[0];
+        if (id.contains("?list="))
+            id = id.split("\\?list=")[0];
+        if (id.contains("?t="))
+            id = id.split("\\?t=")[0];
+
+        return id;
     }
 
     /**

@@ -30,7 +30,7 @@ export class DownloadPageComponent implements OnInit {
 
     clickForDownload(url: string) {
         this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
-            console.log(videoInfoDetail);
+            console.log(videoInfoDetail); //todo -> retirar consolelog
             this.videoInfo = videoInfoDetail;
         }, e => {
             window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
