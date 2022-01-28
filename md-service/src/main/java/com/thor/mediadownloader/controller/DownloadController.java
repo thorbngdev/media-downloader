@@ -1,6 +1,5 @@
 package com.thor.mediadownloader.controller;
 
-import com.github.kiulian.downloader.model.videos.VideoInfo;
 import com.thor.mediadownloader.model.VideoInfoDetail;
 import com.thor.mediadownloader.service.DownloadService;
 import org.slf4j.Logger;
@@ -25,12 +24,12 @@ public class DownloadController {
 
     private static final String DOWNLOAD_ENDPOINT = "/download/{format}";
 
-    private static final String VIDEO_DETAILS_ENDPOINT = "/video-info";
+    private static final String VIDEO_INFO_ENDPOINT = "/video-info";
 
     @Autowired
     private DownloadService downloadService;
 
-    @GetMapping(value = VIDEO_DETAILS_ENDPOINT)
+    @GetMapping(value = VIDEO_INFO_ENDPOINT)
     public ResponseEntity<VideoInfoDetail> getVideoInfo(@RequestParam String url) {
         return ResponseEntity.ok(downloadService.getVideoInfo(url));
     }

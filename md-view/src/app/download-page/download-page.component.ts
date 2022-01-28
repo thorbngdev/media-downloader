@@ -8,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DownloadPageComponent implements OnInit {
 
-    //gold and oden btw
-    readonly exampleUrl = 'https://www.youtube.com/watch?v=6FscTa_Nqwo';
-
-    //example format, have 3: audio, video (original), video with no sound
-    readonly exampleFormat = 'video';
-
-    res: string = '';
+    /**
+     * Video Info Props
+        String videoId;
+        String title;
+        String author;
+        List<String> thumbnails;
+        String description;
+        long viewCount;
+        int averageRating;
+        List<String> keywords;
+     */
+    videoInfo: any = undefined;
 
     constructor(private downloadService: DownloadService) { }
 
@@ -24,25 +29,17 @@ export class DownloadPageComponent implements OnInit {
 
 
     clickForDownload(url: string) {
-        this.downloadService.getVideoInfo(url).subscribe(videoInfo => {
-            /*
-                String videoId;
-                String title;
-                String author;
-                List<String> thumbnails;
-                String description;
-                long viewCount;
-                int averageRating;
-                List<String> keywords;
-            */
-            console.log(videoInfo);
-            this.download(videoInfo, url);
+        this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
+            console.log(videoInfoDetail);
+            this.videoInfo = videoInfoDetail;
+        }, e => {
+            window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
         });
     }
 
-    private download(videoInfo: any, url: string) {
-        this.downloadService.download(url, this.exampleFormat).subscribe( (response: any) => {
-            let filename = videoInfo.title.concat('.m4a');
+    download(url: string, format: string) {
+        this.downloadService.download(url, format).subscribe( (response: any) => {
+            let filename = this.videoInfo.title.concat('.m4a');
             let dataType = response.type;
             let binaryData = [];
             binaryData.push(response);
@@ -52,6 +49,8 @@ export class DownloadPageComponent implements OnInit {
                 downloadLink.setAttribute('download', filename);
             document.body.appendChild(downloadLink);
             downloadLink.click();
+        }, e => {
+            window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
         });
     }
 
