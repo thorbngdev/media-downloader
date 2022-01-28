@@ -1,7 +1,8 @@
 package com.thor.mediadownloader.controller;
 
+import com.github.kiulian.downloader.model.videos.VideoInfo;
+import com.thor.mediadownloader.model.VideoInfoDetail;
 import com.thor.mediadownloader.service.DownloadService;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,15 @@ public class DownloadController {
 
     private static final String DOWNLOAD_ENDPOINT = "/download/{format}";
 
+    private static final String VIDEO_DETAILS_ENDPOINT = "/video-info";
+
     @Autowired
     private DownloadService downloadService;
+
+    @GetMapping(value = VIDEO_DETAILS_ENDPOINT)
+    public ResponseEntity<VideoInfoDetail> getVideoInfo(@RequestParam String url) {
+        return ResponseEntity.ok(downloadService.getVideoInfo(url));
+    }
 
     @GetMapping(value = DOWNLOAD_ENDPOINT)
     public ResponseEntity<Resource> downloadEndpoint(@PathVariable String format, @RequestParam String url) throws IOException {

@@ -1,6 +1,6 @@
 <body class="main-body">
     <label class="def-text">Youtube URL</label>
-    <input class="url-input" type="text">
+    <input #urlInput class="url-input" type="text">
     <div class="download-options">
         <label class="form-check-label">
             <input type="radio" class="form-check-input" name="" id="" value="checkedValue" checked>
@@ -15,7 +15,7 @@
             No Sound Video
         </label>
     </div>
-    <button class="download-button" (click)="download()">Download</button>
+    <button class="download-button" (click)="clickForDownload(urlInput.value)">Download</button>
     <label *ngIf="res.length > 0">
         {{res}}
     </label>

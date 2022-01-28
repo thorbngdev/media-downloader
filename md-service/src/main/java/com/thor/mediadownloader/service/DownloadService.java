@@ -10,6 +10,7 @@ import com.github.kiulian.downloader.model.videos.formats.AudioFormat;
 import com.github.kiulian.downloader.model.videos.formats.Format;
 import com.github.kiulian.downloader.model.videos.formats.VideoFormat;
 import com.github.kiulian.downloader.model.videos.formats.VideoWithAudioFormat;
+import com.thor.mediadownloader.model.VideoInfoDetail;
 import com.thor.mediadownloader.utils.YoutubeDownloaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +63,15 @@ public class DownloadService {
         logger.info("{} downloaded", details.title());
 
         return downloader.downloadVideoFile(downloadRequest).data();
+    }
+
+    public VideoInfoDetail getVideoInfo(String url) {
+        YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
+        String youtubeId = getYoutubeId(url);
+        RequestVideoInfo request = new RequestVideoInfo(youtubeId);
+        Response<VideoInfo> response = downloader.getVideoInfo(request);
+
+        return new VideoInfoDetail(response.data());
     }
 
     private String getYoutubeId(String url) {

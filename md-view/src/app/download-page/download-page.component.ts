@@ -19,11 +19,30 @@ export class DownloadPageComponent implements OnInit {
     constructor(private downloadService: DownloadService) { }
 
     ngOnInit(): void {
+
     }
 
-    download() {
-        this.downloadService.download(this.exampleUrl, this.exampleFormat).subscribe( (response: any) => {
-            let filename = 'musica.m4a';
+
+    clickForDownload(url: string) {
+        this.downloadService.getVideoInfo(url).subscribe(videoInfo => {
+            /*
+                String videoId;
+                String title;
+                String author;
+                List<String> thumbnails;
+                String description;
+                long viewCount;
+                int averageRating;
+                List<String> keywords;
+            */
+            console.log(videoInfo);
+            this.download(videoInfo, url);
+        });
+    }
+
+    private download(videoInfo: any, url: string) {
+        this.downloadService.download(url, this.exampleFormat).subscribe( (response: any) => {
+            let filename = videoInfo.title.concat('.m4a');
             let dataType = response.type;
             let binaryData = [];
             binaryData.push(response);

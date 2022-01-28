@@ -7,6 +7,10 @@ export class DownloadService {
 
     constructor(private httpClient: HttpClient) {}
 
+    getVideoInfo(url: string) {
+        return this.httpClient.get(`${environment.apiUrl}/video-info?url=${url}`);
+    }
+
     download(downloadUrl: string, format: string) {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'audio/mp4');
