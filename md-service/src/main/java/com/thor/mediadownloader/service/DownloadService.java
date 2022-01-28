@@ -29,7 +29,7 @@ public class DownloadService {
      * @param formatStr
      * @return
      */
-    public String download(String url, String formatStr) {
+    public File download(String url, String formatStr) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
         String youtubeId = getYoutubeId(url);
         RequestVideoInfo request = new RequestVideoInfo(youtubeId);
@@ -59,9 +59,9 @@ public class DownloadService {
                 .saveTo(outputFile)
                 .renameTo(titulo)
                 .overwriteIfExists(true);
-        Response<File> downloadResponse = downloader.downloadVideoFile(downloadRequest);
         logger.info("{} downloaded", details.title());
-        return downloadResponse.data().getName();
+
+        return downloader.downloadVideoFile(downloadRequest).data();
     }
 
     private String getYoutubeId(String url) {
