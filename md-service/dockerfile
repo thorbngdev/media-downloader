@@ -1,0 +1,6 @@
+from openjdk:12-alpine
+MAINTAINER github/thorbngdev
+COPY ./target/media-downloader-0.0.1-SNAPSHOT.war /app/media-downloader-0.0.1-SNAPSHOT.war
+WORKDIR /app
+ENTRYPOINT ["java", "-jar", "media-downloader-0.0.1-SNAPSHOT.war"]
+EXPOSE 8080

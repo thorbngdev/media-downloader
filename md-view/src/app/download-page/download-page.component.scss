@@ -129,6 +129,11 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 
+.get-info-icon:hover {
+    opacity: 0.7;
+    box-shadow: #00CDAC;
+}
+
 .get-info-icon-downloading {
     opacity: 0.5;
 }
