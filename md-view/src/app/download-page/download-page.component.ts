@@ -1,7 +1,5 @@
-import { DownloadService } from './../service/download-service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HttpEventType } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { DownloadService } from './../service/download-service';
 
 @Component({
     selector: 'download-page',
@@ -12,16 +10,12 @@ export class DownloadPageComponent implements OnInit {
     
     videoInfo: any = undefined;
     isDownloading = false;
+    downloadUrl = '';
 
     innerWidth: any;
     innerHeight: any;
 
     @ViewChild('urlInput') input: ElementRef = new ElementRef('urlInput');
-
-// public clear() {
-//     this.input.NativeElement.value = '';
-// }
-
     
     constructor(private downloadService: DownloadService) { }
 
@@ -31,10 +25,11 @@ export class DownloadPageComponent implements OnInit {
     }
 
     clickForDownload(url: string) {
-        this.input.nativeElement.value = '';
         if (!this.isDownloading) {
+            this.downloadUrl = url;
             this.isDownloading = true;
             this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
+                this.input.nativeElement.value = '';
                 this.videoInfo = videoInfoDetail;
                 this.isDownloading = false;
             }, e => {
@@ -44,9 +39,9 @@ export class DownloadPageComponent implements OnInit {
         }
     }
 
-    download(url: string, format: string) {
+    download(format: string) {
         this.isDownloading = true;
-        this.downloadService.download(url, format).subscribe( (response: any) => {
+        this.downloadService.download(this.downloadUrl, format).subscribe( (response: any) => {
             this.isDownloading = false;
             let filename = this.videoInfo.title.concat('.m4a');
             let dataType = response.type;

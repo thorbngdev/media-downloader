@@ -13,9 +13,9 @@
         </div>
         <div class="video-download-buttons-div">
             <label class="title-download-buttons"><strong>Download</strong></label>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'audio')" [disabled]="isDownloading">Only sound</button>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video')" [disabled]="isDownloading">Original Video</button>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video-no-sound')" [disabled]="isDownloading">Video Without Sound</button>
+            <button class="video-download-buttons-prop" (click)="download('audio')" [disabled]="isDownloading">Only sound</button>
+            <button class="video-download-buttons-prop" (click)="download('video')" [disabled]="isDownloading">Original Video</button>
+            <button class="video-download-buttons-prop" (click)="download('video-no-sound')" [disabled]="isDownloading">Video Without Sound</button>
         </div>
     </div>
 </body>
