@@ -1,6 +1,7 @@
 import { DownloadService } from './../service/download-service';
 import { Component, OnInit } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'download-page',
@@ -24,10 +25,13 @@ export class DownloadPageComponent implements OnInit {
     }
 
     clickForDownload(url: string) {
+        this.isDownloading = true;
         this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
             this.videoInfo = videoInfoDetail;
+            this.isDownloading = false;
         }, e => {
             window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
+            this.isDownloading = false;
         });
     }
 
@@ -61,6 +65,10 @@ export class DownloadPageComponent implements OnInit {
         }
 
         return this.videoInfo.thumbnails[2];
+    }
+
+    goToGithub() {
+        window.open('https://github.com/thorbngdev/media-downloader');
     }
 
 }
