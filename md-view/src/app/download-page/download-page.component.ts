@@ -25,14 +25,16 @@ export class DownloadPageComponent implements OnInit {
     }
 
     clickForDownload(url: string) {
-        this.isDownloading = true;
-        this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
-            this.videoInfo = videoInfoDetail;
-            this.isDownloading = false;
-        }, e => {
-            window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
-            this.isDownloading = false;
-        });
+        if (!this.isDownloading) {
+            this.isDownloading = true;
+            this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
+                this.videoInfo = videoInfoDetail;
+                this.isDownloading = false;
+            }, e => {
+                window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
+                this.isDownloading = false;
+            });
+        }
     }
 
     download(url: string, format: string) {
@@ -69,6 +71,14 @@ export class DownloadPageComponent implements OnInit {
 
     goToGithub() {
         window.open('https://github.com/thorbngdev/media-downloader');
+    }
+
+    goToLinkedin() {
+        window.open('https://www.linkedin.com/in/eduardo-torres-galvao/');
+    }
+
+    getInfoIconStyle() {
+        return this.isDownloading ? 'get-info-icon-downloading' : 'get-info-icon';
     }
 
 }

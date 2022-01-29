@@ -24,7 +24,7 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
     HttpClientModule,
     BrowserAnimationsModule,
     NgProgressModule.withConfig({
-      color: "#42f542",
+      color: "cornflowerblue",
       thick: true
     }),
     NgProgressHttpModule

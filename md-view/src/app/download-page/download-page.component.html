@@ -1,10 +1,9 @@
 <body class="main-body">
     <label class="def-text"><strong>Youtube Downloader</strong></label>
     <input #urlInput class="url-input" type="text" placeholder="ex. https://www.youtube.com/watch?v=hEdV6MWq18I">
-    <button class="load-button" (click)="clickForDownload(urlInput.value)" [disabled]="isDownloading">Load</button>
+    <img src="assets/icons/icons8-submit-progress-64.png" (click)="clickForDownload(urlInput.value)" [ngClass]="getInfoIconStyle()">
     <div *ngIf="videoInfo != undefined" class="secondary-body-1">
         <div class="video-info-detail">
-            <label class="title-info-card"><strong>Video Infos</strong></label>
             <img class="thumbnail-img" [src]="getThumbnail()">
             <label><strong>Title:</strong> {{videoInfo.title}}</label>
             <label><strong>Duration:</strong> {{videoInfo.duration}}</label>
@@ -20,5 +19,6 @@
         </div>
     </div>
 </body>
-<img class="github-icon" src="assets/icons/icons8-github-90.png" (click)="goToGithub()">
+<img class="linkedin-icon" src="assets/icons/icons8-linkedin-96.png" (click)="goToLinkedin()">
+<img class="github-icon" src="assets/icons/icons8-github-96.png" (click)="goToGithub()">
 <ng-progress></ng-progress>

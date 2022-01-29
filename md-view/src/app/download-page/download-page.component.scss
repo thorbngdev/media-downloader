@@ -28,7 +28,7 @@
     text-align: center;
     font-size: 16px;
     font-weight: 550;
-    color: forestgreen;
+    color: cadetblue;
 }
 
 .download-options {
@@ -44,34 +44,38 @@
     border-style: solid;
     border-radius: 0.5rem;
     padding: 8px;
-    border-color: rgba(137, 211, 0, 0.199);
+    border-color: rgba(100, 148, 237, 0.13);
     height: 100%;
 }
 
+.video-download-buttons-prop {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
 .video-download-buttons-prop {
+    padding: 12px 19px;
+    text-align: center;
+    // text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: azure;
     border: none;
-    border-radius: 0.45rem;
-    font-family: "Dongle", sans-serif;
-    font-size: 24px;
-}
+    border-radius: 10px;
+    display: block;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+ }
 
-.video-download-buttons-prop:hover {
-    cursor: pointer;
-    background-color: rgb(209, 255, 123);
-}
+ .video-download-buttons-prop:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+   cursor: pointer;
+ }
 
-.load-button {
-    border-radius: 0.45rem;
-    border: none;
-    font-family: "Dongle", sans-serif;
-    font-size: 24px;
-    width: 100px;
-}
+ .video-download-buttons-prop:disabled {
+    color: rgba(255, 0, 157, 0.26);
+    background-image: linear-gradient(to right, #49ca8e2a 0%, #96ded033  51%, #50c9c32c  100%)
+  }
 
-.load-button:hover{
-    cursor: pointer;
-    background-color: rgb(209, 255, 123);
-}
 
 .video-info-detail {
     display: flex;
@@ -81,7 +85,6 @@
     grid-gap: 15px;
     grid-gap: 15px;
     gap: 7px;
-    font-family: "Dongle", sans-serif;
     font-size: 24px;
     align-content: center;
     width: 68%;
@@ -89,23 +92,38 @@
     border-style: solid;
     border-radius: 0.5rem;
     padding: 8px;
-    border-color: rgba(137, 211, 0, 0.199);
+    border-color: rgba(100, 148, 237, 0.13);
 }
 
-.title-download-buttons, .title-info-card {
-    font-family: "Dongle", sans-serif;
+.title-download-buttons {
     font-size: 32px;
     align-self: center;
 }
 
 .thumbnail-img {
     align-self: center;
+    border-radius: 10px;
+    box-shadow: 0 0 8px cornflowerblue;
+}
+
+.linkedin-icon {
+    position: absolute;
+    top: 76%;
+    right: 1.5%;
+    cursor: pointer;
 }
 
 .github-icon {
     position: absolute;
     top: 88%;
-    right: 46.5%;
-    // background-color: rgba(50, 205, 50, 0.288);
+    right: 1.5%;
     cursor: pointer;
+}
+
+.get-info-icon {
+    cursor: pointer;
+}
+
+.get-info-icon-downloading {
+    opacity: 0.5;
 }
