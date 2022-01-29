@@ -5,7 +5,7 @@
     <div *ngIf="videoInfo != undefined" class="secondary-body-1">
         <div class="video-info-detail">
             <label class="title-info-card"><strong>Video Infos</strong></label>
-            <img class="thumbnail-img" [src]="videoInfo.thumbnails[2]">
+            <img class="thumbnail-img" [src]="getThumbnail()">
             <label><strong>Title:</strong> {{videoInfo.title}}</label>
             <label><strong>Duration:</strong> {{videoInfo.duration}}</label>
             <label><strong>Views:</strong> {{videoInfo.viewCount}}</label>
@@ -14,9 +14,10 @@
         </div>
         <div class="video-download-buttons-div">
             <label class="title-download-buttons"><strong>Download</strong></label>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'audio')">Only sound</button>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video')">Original Video</button>
-            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video-no-sound')">Video Without Sound</button>
+            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'audio')" [disabled]="isDownloading">Only sound</button>
+            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video')" [disabled]="isDownloading">Original Video</button>
+            <button class="video-download-buttons-prop" (click)="download(urlInput.value, 'video-no-sound')" [disabled]="isDownloading">Video Without Sound</button>
         </div>
     </div>
 </body>
+<ng-progress></ng-progress>

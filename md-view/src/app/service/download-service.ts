@@ -13,8 +13,13 @@ export class DownloadService {
 
     download(downloadUrl: string, format: string) {
         let headers = new HttpHeaders();
-        headers.append('Content-Type', 'audio/mp4');
-        return this.httpClient.get(`${environment.apiUrl}/download/${format}?url=${downloadUrl}`,{headers: headers, responseType: 'blob' as 'json'});
+        headers.append('Content-Type', 'application/json');
+        return this.httpClient.get(`${environment.apiUrl}/download/${format}?url=${downloadUrl}`,
+        {
+            headers: headers, 
+            responseType: 'blob', 
+            reportProgress: true
+        });
     }
 
 }

@@ -4,22 +4,17 @@ import com.github.kiulian.downloader.YoutubeDownloader;
 import com.github.kiulian.downloader.downloader.request.RequestVideoInfo;
 import com.github.kiulian.downloader.downloader.request.RequestVideoStreamDownload;
 import com.github.kiulian.downloader.downloader.response.Response;
-import com.github.kiulian.downloader.model.videos.VideoDetails;
 import com.github.kiulian.downloader.model.videos.VideoInfo;
-import com.github.kiulian.downloader.model.videos.formats.AudioFormat;
 import com.github.kiulian.downloader.model.videos.formats.Format;
-import com.github.kiulian.downloader.model.videos.formats.VideoFormat;
-import com.github.kiulian.downloader.model.videos.formats.VideoWithAudioFormat;
 import com.thor.mediadownloader.model.VideoInfoDetail;
 import com.thor.mediadownloader.utils.YoutubeDownloaderUtil;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.nio.channels.FileChannel;
-import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 @Service
 public class DownloadService {
@@ -79,33 +74,6 @@ public class DownloadService {
         return id;
     }
 
-    /**
-     * Info - pode ser obtido a melhor qualidade de cada elemento audio/video com o metodo bestXYZ
-     * @param video
-     * @param videoWithAudioFormats
-     * @param videoFormats
-     * @param audioFormats
-     */
-    private void printVideoContent(VideoInfo video, List<VideoWithAudioFormat> videoWithAudioFormats, List<VideoFormat> videoFormats, List<AudioFormat> audioFormats) {
-        logger.info(video.details().title());
-        logger.info(video.details().videoId());
-        logger.info(video.details().author());
-        logger.info("Average rating: {}", video.details().averageRating());
-        logger.info("View count: {}", video.details().viewCount());
-        System.out.println("=== Video With Audio ===");
-        videoWithAudioFormats.forEach(it -> {
-            System.out.println(it.audioQuality() + ", " + it.videoQuality() + " : " + it.url());
-        });
-        System.out.println("=== Only Video ===");
-        videoFormats.forEach(it -> {
-            System.out.println(it.videoQuality() + " : " + it.url());
-        });
-        System.out.println("=== Only Audio ===");
-        audioFormats.forEach(it -> {
-            System.out.println(it.audioQuality() + " : " + it.url());
-        });
-    }
-
     private Format getFormatFromString(String formatStr, VideoInfo video) {
         switch(formatStr) {
             case "audio":
@@ -114,6 +82,8 @@ public class DownloadService {
                 return video.bestVideoWithAudioFormat();
             case "video-no-sound":
                 return video.bestVideoFormat();
+            default:
+                return null;
         }
     }
 
