@@ -16,6 +16,10 @@
     gap: 24px;
 }
 
+input::-webkit-input-placeholder {
+    opacity: 0.3;
+}
+
 .def-text {
     font-size: 48px;
 }
@@ -48,7 +52,8 @@
     height: 100%;
 }
 
-.video-download-buttons-prop {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
+
+.video-download-buttons-prop {background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC  51%, #02AAB0  100%)}
 .video-download-buttons-prop {
     padding: 12px 19px;
     text-align: center;

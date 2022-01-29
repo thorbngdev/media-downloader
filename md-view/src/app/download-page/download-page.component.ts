@@ -1,5 +1,5 @@
 import { DownloadService } from './../service/download-service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -16,6 +16,12 @@ export class DownloadPageComponent implements OnInit {
     innerWidth: any;
     innerHeight: any;
 
+    @ViewChild('urlInput') input: ElementRef = new ElementRef('urlInput');
+
+// public clear() {
+//     this.input.NativeElement.value = '';
+// }
+
     
     constructor(private downloadService: DownloadService) { }
 
@@ -25,6 +31,7 @@ export class DownloadPageComponent implements OnInit {
     }
 
     clickForDownload(url: string) {
+        this.input.nativeElement.value = '';
         if (!this.isDownloading) {
             this.isDownloading = true;
             this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
