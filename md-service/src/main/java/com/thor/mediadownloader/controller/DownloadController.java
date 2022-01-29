@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 @MediaDownloaderApiV1
 public class DownloadController {
@@ -37,11 +38,10 @@ public class DownloadController {
     @GetMapping(value = DOWNLOAD_ENDPOINT)
     public ResponseEntity<Resource> downloadEndpoint(@PathVariable String format, @RequestParam String url) throws IOException {
         logger.info("Downloading -> {}...", url);
-        File file = downloadService.download(url, format);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        InputStream is = downloadService.download(url, format);
+        InputStreamResource resource = new InputStreamResource(is);
 
         return ResponseEntity.ok()
-                .contentLength(file.length())
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }

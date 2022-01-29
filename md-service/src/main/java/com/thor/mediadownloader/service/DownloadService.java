@@ -1,8 +1,8 @@
 package com.thor.mediadownloader.service;
 
 import com.github.kiulian.downloader.YoutubeDownloader;
-import com.github.kiulian.downloader.downloader.request.RequestVideoFileDownload;
 import com.github.kiulian.downloader.downloader.request.RequestVideoInfo;
+import com.github.kiulian.downloader.downloader.request.RequestVideoStreamDownload;
 import com.github.kiulian.downloader.downloader.response.Response;
 import com.github.kiulian.downloader.model.videos.VideoDetails;
 import com.github.kiulian.downloader.model.videos.VideoInfo;
@@ -12,11 +12,13 @@ import com.github.kiulian.downloader.model.videos.formats.VideoFormat;
 import com.github.kiulian.downloader.model.videos.formats.VideoWithAudioFormat;
 import com.thor.mediadownloader.model.VideoInfoDetail;
 import com.thor.mediadownloader.utils.YoutubeDownloaderUtil;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.io.*;
+import java.nio.channels.FileChannel;
 import java.util.List;
 
 @Service
@@ -30,39 +32,19 @@ public class DownloadService {
      * @param formatStr
      * @return
      */
-    public File download(String url, String formatStr) {
+    public InputStream download(String url, String formatStr) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
         String youtubeId = getYoutubeId(url);
         RequestVideoInfo request = new RequestVideoInfo(youtubeId);
         Response<VideoInfo> response = downloader.getVideoInfo(request);
         VideoInfo video = response.data();
-        VideoDetails details = video.details();
-        File outputFile = new File("youtube_files");
 
-        Format format = null;
-        String titulo = null;
-        switch(formatStr) {
-            case "audio":
-                titulo = "Audio - " + details.title();
-                format = video.bestAudioFormat();
-                break;
-            case "video":
-                titulo = "Original - " + details.title();
-                format = video.bestVideoWithAudioFormat();
-                break;
-            case "video-no-sound":
-                titulo = "Video - " + details.title();
-                format = video.bestVideoFormat();
-                break;
-        }
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        RequestVideoStreamDownload downloadRequest = new RequestVideoStreamDownload(getFormatFromString(formatStr, video), os);
+        Response<Void> downloadResponse = downloader.downloadVideoStream(downloadRequest);
+        byte[] bytes = os.toByteArray();
 
-        RequestVideoFileDownload downloadRequest = new RequestVideoFileDownload(format)
-                .saveTo(outputFile)
-                .renameTo(titulo)
-                .overwriteIfExists(true);
-        logger.info("{} downloaded", details.title());
-
-        return downloader.downloadVideoFile(downloadRequest).data();
+        return new ByteArrayInputStream(bytes);
     }
 
     public VideoInfoDetail getVideoInfo(String url) {
@@ -122,6 +104,17 @@ public class DownloadService {
         audioFormats.forEach(it -> {
             System.out.println(it.audioQuality() + " : " + it.url());
         });
+    }
+
+    private Format getFormatFromString(String formatStr, VideoInfo video) {
+        switch(formatStr) {
+            case "audio":
+                return video.bestAudioFormat();
+            case "video":
+                return video.bestVideoWithAudioFormat();
+            case "video-no-sound":
+                return video.bestVideoFormat();
+        }
     }
 
 }

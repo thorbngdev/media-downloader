@@ -30,7 +30,6 @@ export class DownloadPageComponent implements OnInit {
 
     clickForDownload(url: string) {
         this.downloadService.getVideoInfo(url).subscribe(videoInfoDetail => {
-            console.log(videoInfoDetail); //todo -> retirar consolelog
             this.videoInfo = videoInfoDetail;
         }, e => {
             window.alert('Ocorreu um erro ao carregar este vídeo, por favor verifique se o link inserido está correto');
@@ -39,6 +38,7 @@ export class DownloadPageComponent implements OnInit {
 
     download(url: string, format: string) {
         this.downloadService.download(url, format).subscribe( (response: any) => {
+            console.log(response);
             let filename = this.videoInfo.title.concat('.m4a');
             let dataType = response.type;
             let binaryData = [];
