@@ -8,4 +8,4 @@ Será sempre escolhida a melhor qualidade possível
 ## Contribuição
 Fique avontade para contribuir com o projeto caso queira
 ## Criado por
-[LinkedIn](https://www.linkedin.com/in/eduardo-torres-galvao/)
+[Eduardo Galvao](https://www.linkedin.com/in/eduardo-torres-galvao/)
