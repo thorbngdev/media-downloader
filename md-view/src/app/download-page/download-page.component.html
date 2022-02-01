@@ -1,7 +1,7 @@
 <body class="main-body">
     <label class="def-text"><strong>Youtube Downloader</strong></label>
     <input #urlInput class="url-input" type="text" placeholder="ex. https://www.youtube.com/watch?v=hEdV6MWq18I">
-    <img src="assets/icons/icons8-submit-progress-64.png" (click)="clickForDownload(urlInput.value)" [ngClass]="getInfoIconStyle()">
+    <img src="assets/icons/icons8-submit-progress-64.png" (click)="searchVideo(urlInput.value)" [ngClass]="getInfoIconStyle()">
     <div *ngIf="videoInfo != undefined" class="secondary-body-1">
         <div class="video-info-detail">
             <img class="thumbnail-img" [src]="getThumbnail()">
@@ -18,6 +18,5 @@
         </div>
     </div>
 </body>
-<img class="linkedin-icon" src="assets/icons/icons8-linkedin-96.png" (click)="goToLinkedin()">
 <img class="github-icon" src="assets/icons/icons8-github-96.png" (click)="goToGithub()">
 <ng-progress></ng-progress>

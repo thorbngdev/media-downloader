@@ -137,3 +137,43 @@ input::-webkit-input-placeholder {
 .get-info-icon-downloading {
     opacity: 0.5;
 }
+
+@media (max-width: 550px) {
+
+    .video-download-buttons-div {
+        gap: 15px;
+        width: 90%;
+    }
+
+    .video-download-buttons-prop {
+        padding: 10px 19px;
+        font-size: 18px;
+    }
+
+    .secondary-body-1 {
+        width: 90%;
+        gap: 12px;
+        flex-direction: column;
+    }
+
+    .video-info-detail {
+        font-size: 16px;
+        width: 90%;
+    }
+
+    .url-input {
+        width: 318px;
+    }
+
+    .def-text {
+        font-size: 29px;
+    }
+
+    .main-body {
+        margin-top: 8%;
+    }
+
+    .github-icon {
+        display: none;
+    }
+}

@@ -24,7 +24,7 @@ export class DownloadPageComponent implements OnInit {
         this.innerHeight = window.innerHeight;
     }
 
-    clickForDownload(url: string) {
+    searchVideo(url: string) {
         if (!this.isDownloading) {
             this.downloadUrl = url;
             this.isDownloading = true;
@@ -73,10 +73,6 @@ export class DownloadPageComponent implements OnInit {
 
     goToGithub() {
         window.open('https://github.com/thorbngdev/media-downloader');
-    }
-
-    goToLinkedin() {
-        window.open('https://www.linkedin.com/in/eduardo-torres-galvao/');
     }
 
     getInfoIconStyle() {
