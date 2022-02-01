@@ -1,1 +1,1 @@
-web: java -cp target/classes/:target/dependency/* com.thor.mediadownloader
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/media-downloader-0.0.1-SNAPSHOT.war
