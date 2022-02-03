@@ -1,7 +1,4 @@
-# URL do projeto
-[Youtube Downloader](https://www.youtubedownloader.com.br/)
-
-# media-downloader
+## media-downloader
 Ferramenta criada para download de vídeos do youtube em 3 categorias:
 * Vídeo original
 * Vídeo sem o audio
@@ -10,5 +7,9 @@ Ferramenta criada para download de vídeos do youtube em 3 categorias:
 Será sempre escolhida a melhor qualidade possível
 ## Contribuição
 Fique avontade para contribuir com o projeto caso queira
+
+## Link
+[Youtube Downloader](https://www.youtubedownloader.com.br/)
+
 ## Criado por
 [Eduardo Galvao](https://www.linkedin.com/in/eduardo-torres-galvao/)
