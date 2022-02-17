@@ -57,7 +57,6 @@ input::-webkit-input-placeholder {
 .video-download-buttons-prop {
     padding: 12px 19px;
     text-align: center;
-    // text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
     color: azure;
@@ -70,7 +69,7 @@ input::-webkit-input-placeholder {
  }
 
  .video-download-buttons-prop:hover {
-   background-position: right center; /* change the direction of the change here */
+   background-position: right center;
    color: #fff;
    text-decoration: none;
    cursor: pointer;
@@ -87,7 +86,6 @@ input::-webkit-input-placeholder {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    grid-gap: 15px;
     grid-gap: 15px;
     gap: 7px;
     font-size: 24px;
