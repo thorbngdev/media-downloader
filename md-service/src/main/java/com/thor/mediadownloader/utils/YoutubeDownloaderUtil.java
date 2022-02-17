@@ -2,8 +2,11 @@ package com.thor.mediadownloader.utils;
 
 import com.github.kiulian.downloader.Config;
 import com.github.kiulian.downloader.YoutubeDownloader;
+import com.github.kiulian.downloader.model.videos.formats.Format;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class YoutubeDownloaderUtil {
 
@@ -23,4 +26,7 @@ public class YoutubeDownloaderUtil {
                MdStringUtils.addLeftZeroToTimeField(seconds);
     }
 
+    public static List<String> getVideoFormatTypes(List<Format> formats) {
+        return formats.stream().map(Format::type).distinct().collect(Collectors.toList());
+    }
 }

@@ -16,6 +16,7 @@ public class VideoInfoDetail {
     private int averageRating;
     private List<String> keywords;
     private String duration;
+    private List<String> formatTypes;
 
     public VideoInfoDetail() {
     }
@@ -30,6 +31,7 @@ public class VideoInfoDetail {
         averageRating = videoInfo.details().averageRating();
         keywords = videoInfo.details().keywords();
         duration = YoutubeDownloaderUtil.getVideoDuration(videoInfo.details().lengthSeconds());
+        formatTypes = YoutubeDownloaderUtil.getVideoFormatTypes(videoInfo.formats());
     }
 
     public String getVideoId() {
@@ -104,4 +106,11 @@ public class VideoInfoDetail {
         this.duration = duration;
     }
 
+    public List<String> getFormatTypes() {
+        return formatTypes;
+    }
+
+    public void setFormatTypes(List<String> formatTypes) {
+        this.formatTypes = formatTypes;
+    }
 }

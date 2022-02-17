@@ -79,4 +79,12 @@ export class DownloadPageComponent implements OnInit {
         return this.isDownloading ? 'get-info-icon-downloading' : 'get-info-icon';
     }
 
+    hasFormat(format: string) {
+        if (this.videoInfo != undefined) {
+            return this.videoInfo.formatTypes.includes(format);
+        }
+        
+        return false;
+    }
+
 }
