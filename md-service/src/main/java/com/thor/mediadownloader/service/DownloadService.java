@@ -29,13 +29,7 @@ public class DownloadService {
      */
     public InputStream download(String url, String formatStr) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
-
-        logger.info("url: {} | format: {}", url, formatStr);
-
         String youtubeId = getYoutubeId(url);
-
-        logger.info("youtubeId: {}", youtubeId);
-
         RequestVideoInfo request = new RequestVideoInfo(youtubeId);
         Response<VideoInfo> response = downloader.getVideoInfo(request);
         VideoInfo video = response.data();
@@ -50,7 +44,13 @@ public class DownloadService {
 
     public VideoInfoDetail getVideoInfo(String url) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
+
+        logger.info("url: {}", url);
+        
         String youtubeId = getYoutubeId(url);
+
+        logger.info("youtubeId: {}", youtubeId);
+
         RequestVideoInfo request = new RequestVideoInfo(youtubeId);
         Response<VideoInfo> response = downloader.getVideoInfo(request);
 
