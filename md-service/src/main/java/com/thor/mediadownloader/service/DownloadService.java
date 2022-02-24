@@ -46,7 +46,7 @@ public class DownloadService {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
 
         logger.info("url: {}", url);
-        
+
         String youtubeId = getYoutubeId(url);
 
         logger.info("youtubeId: {}", youtubeId);
