@@ -9,7 +9,6 @@ export class DownloadService {
 
     constructor(private httpClient: HttpClient) {
         this.headers.append('Content-Type', 'application/json');
-        // this.headers.append('Content-Security-Policy', 'upgrade-insecure-requests');
     }
 
     getVideoInfo(url: string) {
