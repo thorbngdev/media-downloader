@@ -12,19 +12,25 @@ export class DownloadService {
     }
 
     getVideoInfo(url: string) {
-        return this.httpClient.get(`${environment.apiUrl}/video-info?url=${url}`,
+        return this.httpClient.get(`${environment.apiUrl}/video-info`,
         {
-            headers: this.headers
+            headers: this.headers,
+            params: {
+                url: url
+            }
         });
     }
 
     download(downloadUrl: string, format: string) {
         
-        return this.httpClient.get(`${environment.apiUrl}/download/${format}?url=${downloadUrl}`,
+        return this.httpClient.get(`${environment.apiUrl}/download/${format}`,
         {
             headers: this.headers, 
             responseType: 'blob', 
-            reportProgress: true
+            reportProgress: true,
+            params: {
+                url: downloadUrl
+            }
         });
     }
 
