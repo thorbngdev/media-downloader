@@ -15,9 +15,3 @@ This project is only for educational purposes. I urge not to use this project to
 [Terms of Service - II. Prohibitions](https://developers.google.com/youtube/terms/api-services-terms-of-service)
 ## Contribuição
 Fique avontade para contribuir com o projeto caso queira
-
-## Link
-[Youtube Downloader](https://www.youtubedownloader.com.br/)
-
-## Criado por
-[Eduardo Galvao](https://www.linkedin.com/in/eduardo-torres-galvao/)
