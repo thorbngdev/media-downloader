@@ -48,6 +48,7 @@ public class DownloadService {
     public VideoInfoDetail getVideoInfo(String url) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
         String youtubeId = getYoutubeId(url);
+
         RequestVideoInfo request = new RequestVideoInfo(youtubeId).callback(new YoutubeCallback<VideoInfo>() {
             @Override
             public void onFinished(VideoInfo videoInfo) {
@@ -59,7 +60,7 @@ public class DownloadService {
                 logger.error("Error: {}", throwable.getMessage());
             }
         }).async();
-        //todo -> response pode trazer null via heroku
+
         Response<VideoInfo> response = downloader.getVideoInfo(request);
 
         return new VideoInfoDetail(response.data());
