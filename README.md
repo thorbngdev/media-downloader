@@ -10,6 +10,8 @@ O propósito deste projeto é apenas para fins educacionais
 
 Não usar este projeto para violar quaisquer leis
 
+This project is only for educational purposes. I urge not to use this project to violate any laws.
+
 [Terms of Service - II. Prohibitions](https://developers.google.com/youtube/terms/api-services-terms-of-service)
 ## Contribuição
 Fique avontade para contribuir com o projeto caso queira
