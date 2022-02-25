@@ -1,6 +1,7 @@
 package com.thor.mediadownloader.service;
 
 import com.github.kiulian.downloader.YoutubeDownloader;
+import com.github.kiulian.downloader.downloader.YoutubeCallback;
 import com.github.kiulian.downloader.downloader.request.RequestVideoInfo;
 import com.github.kiulian.downloader.downloader.request.RequestVideoStreamDownload;
 import com.github.kiulian.downloader.downloader.response.Response;
@@ -23,6 +24,7 @@ public class DownloadService {
 
     /**
      * Doc -> https://github.com/sealedtx/java-youtube-downloader
+     *
      * @param url
      * @param formatStr
      * @return
@@ -34,6 +36,7 @@ public class DownloadService {
         Response<VideoInfo> response = downloader.getVideoInfo(request);
         VideoInfo video = response.data();
 
+        //todo -> ajustar erros de javaheap space
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         RequestVideoStreamDownload downloadRequest = new RequestVideoStreamDownload(getFormatFromString(formatStr, video), os);
         Response<Void> downloadResponse = downloader.downloadVideoStream(downloadRequest);
@@ -44,14 +47,19 @@ public class DownloadService {
 
     public VideoInfoDetail getVideoInfo(String url) {
         YoutubeDownloader downloader = YoutubeDownloaderUtil.instance();
-
-        logger.info("url: {}", url);
-
         String youtubeId = getYoutubeId(url);
+        RequestVideoInfo request = new RequestVideoInfo(youtubeId).callback(new YoutubeCallback<VideoInfo>() {
+            @Override
+            public void onFinished(VideoInfo videoInfo) {
+                logger.info("Video <{}> parsed", videoInfo.details().title());
+            }
 
-        logger.info("youtubeId: {}", youtubeId);
-
-        RequestVideoInfo request = new RequestVideoInfo(youtubeId);
+            @Override
+            public void onError(Throwable throwable) {
+                logger.error("Error: {}", throwable.getMessage());
+            }
+        }).async();
+        //todo -> response pode trazer null via heroku
         Response<VideoInfo> response = downloader.getVideoInfo(request);
 
         return new VideoInfoDetail(response.data());
@@ -81,7 +89,7 @@ public class DownloadService {
     }
 
     private Format getFormatFromString(String formatStr, VideoInfo video) {
-        switch(formatStr) {
+        switch (formatStr) {
             case "audio":
                 return video.bestAudioFormat();
             case "video":

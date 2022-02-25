@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class YoutubeDownloaderUtil {
 
     public static YoutubeDownloader instance() {
-        Config config = new Config.Builder().maxRetries(1).build();
+        Config config = new Config.Builder().maxRetries(3).build();
         return new YoutubeDownloader(config);
     }
 

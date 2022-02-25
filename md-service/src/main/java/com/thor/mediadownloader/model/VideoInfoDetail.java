@@ -22,9 +22,6 @@ public class VideoInfoDetail {
     }
 
     public VideoInfoDetail(VideoInfo videoInfo) {
-        System.out.println(videoInfo);
-        System.out.println(videoInfo.details());
-        System.out.println(videoInfo.details().title());
         videoId = videoInfo.details().videoId();
         title = videoInfo.details().title();
         author = videoInfo.details().author();
