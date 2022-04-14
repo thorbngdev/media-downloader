@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.nio.MappedByteBuffer;
 
 @Service
 public class DownloadService {
@@ -35,11 +36,9 @@ public class DownloadService {
         RequestVideoInfo request = new RequestVideoInfo(youtubeId);
         Response<VideoInfo> response = downloader.getVideoInfo(request);
         VideoInfo video = response.data();
-
-        //todo -> ajustar erros de javaheap space
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ByteArrayOutputStream os = new ByteArrayOutputStream(2048);
         RequestVideoStreamDownload downloadRequest = new RequestVideoStreamDownload(getFormatFromString(formatStr, video), os);
-        Response<Void> downloadResponse = downloader.downloadVideoStream(downloadRequest);
+        Response<Void> downloadResponse = downloader.downloadVideoStream(downloadRequest); //jhs
         byte[] bytes = os.toByteArray();
 
         return new ByteArrayInputStream(bytes);
