@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DownloadService } from './../service/download-service';
+import { DownloadService } from '../service/download.service';
 
 @Component({
     selector: 'download-page',

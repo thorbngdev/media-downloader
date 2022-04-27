@@ -10,9 +10,9 @@ public class HealthCheckController {
 
     private static final Logger logger = LoggerFactory.getLogger(HealthCheckController.class);
 
-    private static final String ENTIDADE = "/health-check";
+    private static final String ENTITY = "/health-check";
 
-    @GetMapping(value = ENTIDADE)
+    @GetMapping(value = ENTITY)
     public ResponseEntity<String> healthCheckEndpoint() {
         logger.info("Aplicação verificada via HealthCheck");
 

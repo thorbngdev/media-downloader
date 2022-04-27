@@ -1,4 +1,5 @@
-import { DownloadService } from './service/download-service';
+import { HealthCheckService } from './service/health-check.service';
+import { DownloadService } from './service/download.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +30,7 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
     }),
     NgProgressHttpModule
   ],
-  providers: [DownloadService],
+  providers: [DownloadService, HealthCheckService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
