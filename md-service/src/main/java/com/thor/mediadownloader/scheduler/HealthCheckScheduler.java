@@ -12,7 +12,7 @@ public class HealthCheckScheduler {
 
     private static final Logger logger = LoggerFactory.getLogger(HealthCheckScheduler.class);
 
-    @Scheduled(fixedRate=1500000)
+    @Scheduled(fixedRate=600000)
     public void healthCheck() {
         logger.info("Heroku Health Check");
     }
