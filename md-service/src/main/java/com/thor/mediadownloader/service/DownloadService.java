@@ -83,6 +83,8 @@ public class DownloadService {
             id = id.split("\\?list=")[0];
         if (id.contains("?t="))
             id = id.split("\\?t=")[0];
+        if (id.contains("&t="))
+            id = id.split("&t=")[0];
 
         return id;
     }
